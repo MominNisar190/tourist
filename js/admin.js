@@ -1,6 +1,6 @@
 'use strict';
 
-const API = 'http://localhost:5000/api';
+const API = 'https://tourist-world.onrender.com/api';
 
 // ── Elements ──────────────────────────────────────────────
 const loginScreen    = document.getElementById('admin-login-screen');

@@ -225,7 +225,7 @@ if (track && testimonialCards.length) {
 }
 
 /* ===== Auth Gate ===== */
-const API_BASE  = 'http://localhost:5000/api';
+const API_BASE  = 'https://tourist-world.onrender.com/api';
 
 /* ===== Booking Form ===== */
 const contactForm = document.getElementById('contact-form');
