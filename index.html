@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADVENTURE</title>
+    <meta name="description" content="Explore the world with Adventure – tours, treks, beaches and more." />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link rel="manifest" href="img/site.webmanifest" />
+    <!-- Clerk: loaded dynamically in script.js -->
+  </head>
+  <body>
+
+    <!-- Auth Gate (blocks site until logged in) -->
+    <div class="auth-gate" id="auth-gate">
+      <div class="auth-gate-bg"></div>
+      <div class="auth-gate-panels">
+
+        <!-- User Panel: Login + Signup -->
+        <div class="auth-gate-box">
+          <div class="auth-gate-brand">
+            <img src="./img/mountain.png" alt="Adventure logo" width="40" />
+            <h1 class="logo" style="font-size:1.4rem">ADVENTURE</h1>
+          </div>
+          <p class="auth-gate-sub">Sign in to explore the world with us</p>
+
+          <!-- Tabs: Login | Sign Up -->
+          <div class="auth-tabs">
+            <button class="auth-tab active" data-gate-tab="login">Login</button>
+            <button class="auth-tab" data-gate-tab="signup">Sign Up</button>
+          </div>
+
+          <!-- Login Form -->
+          <form class="auth-form active" id="gate-login-form" novalidate>
+            <div class="auth-field">
+              <input type="email" id="gate-login-email" placeholder="Email address" required autocomplete="email" />
+              <span class="auth-err" id="gate-login-email-err"></span>
+            </div>
+            <div class="auth-field">
+              <input type="password" id="gate-login-password" placeholder="Password" required autocomplete="current-password" />
+              <span class="auth-err" id="gate-login-password-err"></span>
+            </div>
+            <span class="auth-err auth-err-global" id="gate-login-global-err"></span>
+            <button type="submit" class="ctn auth-submit-btn" id="gate-login-submit">
+              <span class="btn-label">Login</span>
+            </button>
+          </form>
+
+          <!-- Signup Form -->
+          <form class="auth-form" id="gate-signup-form" novalidate>
+            <div class="auth-field">
+              <input type="text" id="gate-signup-name" placeholder="Full name" required autocomplete="name" />
+              <span class="auth-err" id="gate-signup-name-err"></span>
+            </div>
+            <div class="auth-field">
+              <input type="email" id="gate-signup-email" placeholder="Email address" required autocomplete="email" />
+              <span class="auth-err" id="gate-signup-email-err"></span>
+            </div>
+            <div class="auth-field">
+              <input type="password" id="gate-signup-password" placeholder="Password (min 6 chars)" required autocomplete="new-password" />
+              <span class="auth-err" id="gate-signup-password-err"></span>
+            </div>
+            <span class="auth-err auth-err-global" id="gate-signup-global-err"></span>
+            <button type="submit" class="ctn auth-submit-btn" id="gate-signup-submit">
+              <span class="btn-label">Create Account</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Divider -->
+        <div class="gate-divider"><span>or</span></div>
+
+        <!-- Admin Panel -->
+        <div class="auth-gate-box auth-gate-admin">
+          <div class="auth-gate-brand">
+            <i class="fa fa-lock" style="font-size:1.8rem;color:#fc036b"></i>
+            <h2 style="font-family:var(--ff-montserrat);font-size:1.1rem;font-weight:800">Admin Login</h2>
+          </div>
+          <p class="auth-gate-sub">Restricted access — admins only</p>
+          <form id="gate-admin-form" novalidate>
+            <div class="auth-field">
+              <input type="text" id="gate-admin-user" placeholder="Admin username" required autocomplete="username" />
+              <span class="auth-err" id="gate-admin-user-err"></span>
+            </div>
+            <div class="auth-field">
+              <input type="password" id="gate-admin-pass" placeholder="Admin password" required autocomplete="current-password" />
+              <span class="auth-err" id="gate-admin-pass-err"></span>
+            </div>
+            <span class="auth-err auth-err-global" id="gate-admin-global-err"></span>
+            <button type="submit" class="ctn auth-submit-btn gate-admin-btn" id="gate-admin-submit">
+              <span class="btn-label"><i class="fa fa-sign-in"></i> Enter Admin Panel</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+    <!-- /Auth Gate -->
+    <div id="page-loader">
+      <div class="loader-inner">
+        <img src="./img/mountain.png" alt="Adventure logo" width="60" />
+        <p class="loader-text">ADVENTURE</p>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="nav-brand" aria-label="Adventure home">
+        <img src="./img/mountain.png" alt="Mountain logo" width="38" />
+        <span class="logo">ADVENTURE</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home"        class="cir_border" data-section="home">Home</a></li>
+        <li><a href="#events"      class="cir_border" data-section="events">Events</a></li>
+        <li><a href="#explore"     class="cir_border" data-section="explore">Explore</a></li>
+        <li><a href="#tours"       class="cir_border" data-section="tours">Tours</a></li>
+        <li><a href="#stats"       class="cir_border" data-section="stats">Stats</a></li>
+        <li><a href="#gallery"     class="cir_border" data-section="gallery">Gallery</a></li>
+        <li><a href="#about"       class="cir_border" data-section="about">About</a></li>
+        <li><a href="#contribution" class="cir_border" data-section="contribution">Contributors</a></li>
+        <li><a href="#contact"     class="cir_border" data-section="contact">Book</a></li>
+        <li class="theme-toggle-li">
+          <input type="checkbox" class="checkbox" id="checkbox" aria-label="Toggle dark mode" />
+          <label for="checkbox" class="label" aria-hidden="true">
+            <i class="fa fa-moon-o"></i>
+            <i class="fa fa-sun-o"></i>
+            <div class="ball"></div>
+          </label>
+        </li>
+      </ul>
+      <!-- Auth controls -->
+      <div class="nav-auth" id="nav-auth">
+        <div class="user-pill" id="user-pill" style="display:none">
+          <span class="user-pill-avatar" id="user-pill-avatar">A</span>
+          <span id="user-pill-name"></span>
+          <button class="signout-btn" id="signout-btn" title="Sign out"><i class="fa fa-sign-out"></i></button>
+        </div>
+      </div>
+
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- /Navbar -->
+
+    <!-- Hero -->
+    <header id="home">
+      <div class="hero-particles" id="particles"></div>
+      <div class="header-content">
+        <h2 id="quote">Explore the Colourful World</h2>
+        <div class="line"></div>
+        <h1>A WONDERFUL GIFT</h1>
+        <p class="hero-sub">Discover breathtaking destinations, thrilling treks, and unforgettable experiences across the globe.</p>
+        <div class="hero-btns">
+          <a href="#events" class="ctn">Upcoming Events</a>
+          <a href="#explore" class="ctn ctn-outline">Explore World</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <i class="fa fa-chevron-down"></i>
+      </div>
+    </header>
+    <!-- /Hero -->
+
+    <!-- Stats -->
+    <section class="stats-section" id="stats">
+      <div class="container stats-grid">
+        <div class="stat-card" data-target="1200">
+          <i class="fa fa-map-marker"></i>
+          <span class="stat-number" data-target="1200">0</span>
+          <p>Destinations</p>
+        </div>
+        <div class="stat-card" data-target="45000">
+          <i class="fa fa-users"></i>
+          <span class="stat-number" data-target="45000">0</span>
+          <p>Happy Travellers</p>
+        </div>
+        <div class="stat-card" data-target="320">
+          <i class="fa fa-trophy"></i>
+          <span class="stat-number" data-target="320">0</span>
+          <p>Awards Won</p>
+        </div>
+        <div class="stat-card" data-target="98">
+          <i class="fa fa-star"></i>
+          <span class="stat-number" data-target="98">0</span>
+          <p>% Satisfaction</p>
+        </div>
+      </div>
+    </section>
+    <!-- /Stats -->
+
+    <!-- Events -->
+    <section class="events" id="events">
+      <div class="container">
+        <div class="title">
+          <h1>Upcoming Events</h1>
+          <div class="line"></div>
+        </div>
+        <div class="events-filter" role="group" aria-label="Filter events">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="trek">Trek</button>
+          <button class="filter-btn" data-filter="beach">Beach</button>
+          <button class="filter-btn" data-filter="walk">Walk</button>
+        </div>
+        <div class="row events-row">
+          <article class="card col reveal" data-category="trek">
+            <div class="card-img-wrap">
+              <img src="./img/img1.jfif" alt="Everest Base Camp Trek" loading="lazy" />
+              <span class="card-badge">Trek</span>
+            </div>
+            <h4>Everest Camp Trek</h4>
+            <p>Everest base camp trek is one of the most renowned travel destinations in the world — a bucket-list adventure.</p>
+            <div class="card-meta">
+              <span><i class="fa fa-calendar"></i> Apr 15, 2026</span>
+              <span><i class="fa fa-clock-o"></i> 14 Days</span>
+            </div>
+            <a href="#contact" class="ctn">Book Now</a>
+          </article>
+          <article class="card col reveal" data-category="walk">
+            <div class="card-img-wrap">
+              <img src="./img/img2.jfif" alt="Walking Holidays in the Alps" loading="lazy" />
+              <span class="card-badge">Walk</span>
+            </div>
+            <h4>Walking Holidays</h4>
+            <p>Join small guided group walks, enjoy a challenging trek, or a luxury private guided walk made especially for you.</p>
+            <div class="card-meta">
+              <span><i class="fa fa-calendar"></i> May 3, 2026</span>
+              <span><i class="fa fa-clock-o"></i> 7 Days</span>
+            </div>
+            <a href="#contact" class="ctn">Book Now</a>
+          </article>
+          <article class="card col reveal" data-category="beach">
+            <div class="card-img-wrap">
+              <img src="./img/carousel-img1.jpg" alt="Andaman Beaches" loading="lazy" />
+              <span class="card-badge">Beach</span>
+            </div>
+            <h4>Andaman Beaches</h4>
+            <p>Diving in Andaman is exceptional. The coastal belt is one of the richest coral reef ecosystems in the world.</p>
+            <div class="card-meta">
+              <span><i class="fa fa-calendar"></i> Jun 10, 2026</span>
+              <span><i class="fa fa-clock-o"></i> 10 Days</span>
+            </div>
+            <a href="#contact" class="ctn">Book Now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- /Events -->
+
+    <!-- Explore -->
+    <section class="explore" id="explore">
+      <div class="explore-content reveal">
+        <h1>EXPLORE THE WORLD</h1>
+        <div class="line"></div>
+        <p>"Travel makes one modest. You see what a tiny place you occupy in the world." – Gustav Flaubert</p>
+        <p>Exploring will make you want to pack your bag, book that ticket and jet away to somewhere extraordinary.</p>
+        <a href="#tours" class="ctn">Explore More</a>
+      </div>
+    </section>
+    <!-- /Explore -->
+
+    <!-- Tours -->
+    <section class="tours" id="tours">
+      <div class="container row">
+        <div class="col content-col reveal">
+          <h1>UPCOMING TOURS &amp; DESTINATIONS</h1>
+          <div class="line"></div>
+          <ul class="tour-list">
+            <li><i class="fa fa-map-marker"></i> <strong>Apr 28, 2026</strong> — Port of Spain City Tour &amp; Birdseye Fort View</li>
+            <li><i class="fa fa-map-marker"></i> <strong>May 1, 2026</strong> — Tour the Gasparee Caves</li>
+            <li><i class="fa fa-map-marker"></i> <strong>May 4, 2026</strong> — Trinidad North Coast Experience</li>
+            <li><i class="fa fa-map-marker"></i> <strong>Jun 12, 2026</strong> — Himalayan Sunrise Trek</li>
+          </ul>
+          <a href="#contact" class="ctn">Book a Tour</a>
+        </div>
+        <div class="image-col reveal">
+          <div class="image-gallery">
+            <img src="./img/img3.png" alt="Tour destination 1" loading="lazy" />
+            <img src="./img/img4.png" alt="Tour destination 2" loading="lazy" />
+            <img src="./img/img5.png" alt="Tour destination 3" loading="lazy" />
+            <img src="./img/img6.png" alt="Tour destination 4" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Tours -->
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <div class="title">
+          <h1>Photo Gallery</h1>
+          <div class="line"></div>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 1">
+            <img src="./img/carousel-img1.jpg" alt="Adventure gallery 1" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 2">
+            <img src="./img/carousel-img2.jpg" alt="Adventure gallery 2" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 3">
+            <img src="./img/carousel-img3.jpg" alt="Adventure gallery 3" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 4">
+            <img src="./img/carousel-img4.jpg" alt="Adventure gallery 4" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 5">
+            <img src="./img/carousel-img5.jpg" alt="Adventure gallery 5" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+          <div class="gallery-item reveal" tabindex="0" role="button" aria-label="View carousel image 6">
+            <img src="./img/carousel-img6.jpg" alt="Adventure gallery 6" loading="lazy" />
+            <div class="gallery-overlay"><i class="fa fa-search-plus"></i></div>
+          </div>
+        </div>
+      </div>
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <button class="lightbox-prev" id="lightbox-prev" aria-label="Previous image">&#8249;</button>
+        <img src="" alt="Enlarged gallery image" id="lightbox-img" />
+        <button class="lightbox-next" id="lightbox-next" aria-label="Next image">&#8250;</button>
+      </div>
+    </section>
+    <!-- /Photo Gallery -->
+
+    <!-- About -->
+    <section id="about">
+      <div class="title">
+        <h1>About Us</h1>
+        <div class="line"></div>
+      </div>
+      <div id="about_us">
+        <div class="about-carousel-wrap">
+          <div class="containerx">
+            <input type="radio" name="slider" id="item-1" checked />
+            <input type="radio" name="slider" id="item-2" />
+            <input type="radio" name="slider" id="item-3" />
+            <div class="cards">
+              <label class="cardt" for="item-1" id="col-img-1">
+                <img src="./img/carousel-img4.jpg" alt="Adventure scene 1" loading="lazy" />
+              </label>
+              <label class="cardt" for="item-2" id="col-img-2">
+                <img src="./img/carousel-img5.jpg" alt="Adventure scene 2" loading="lazy" />
+              </label>
+              <label class="cardt" for="item-3" id="col-img-3">
+                <img src="./img/carousel-img6.jpg" alt="Adventure scene 3" loading="lazy" />
+              </label>
+            </div>
+          </div>
+          <div class="about-text-panel reveal">
+            <a href="#home" class="about-brand-link">
+              <img src="./img/mountain_dark.jpg" alt="Mountain adventure" width="160" />
+              <h2>Find that</h2>
+              <span class="logo" style="font-size:2rem">ADVENTURE</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /About -->
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="title">
+          <h1>What Travellers Say</h1>
+          <div class="line"></div>
+        </div>
+        <div class="testimonial-track" id="testimonial-track">
+          <div class="testimonial-card">
+            <p>"The Everest trek was life-changing. The team was professional and the views were beyond words."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/50?img=1" alt="Traveller Sarah" />
+              <span>Sarah M. — UK</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>"Andaman beaches exceeded every expectation. Crystal clear water and incredible coral reefs."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/50?img=2" alt="Traveller Raj" />
+              <span>Raj K. — India</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>"The walking holiday in the Alps was perfectly organised. Would book again without hesitation."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/50?img=3" alt="Traveller Emma" />
+              <span>Emma L. — France</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>"Trinidad North Coast was magical. Adventure truly delivers unforgettable experiences."</p>
+            <div class="testimonial-author">
+              <img src="https://i.pravatar.cc/50?img=4" alt="Traveller James" />
+              <span>James O. — Nigeria</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-dots" id="testimonial-dots" aria-label="Testimonial navigation"></div>
+      </div>
+    </section>
+    <!-- /Testimonials -->
+
+    <!-- Contributors -->
+    <div class="title contributors-title">
+      <h1>Contributors</h1>
+      <div class="line"></div>
+    </div>
+    <section class="contributors" id="contribution">
+      <div class="concard"><img src="https://github.com/PritamSarbajna.png" alt="Pritam Sarbajna" class="pfp" /><div class="text"><h1>Pritam Sarbajna</h1></div><div class="logolink"><a href="https://github.com/PritamSarbajna" target="_blank" rel="noreferrer noopener" aria-label="Pritam Sarbajna on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/athar-ansari.png" alt="Athar Ansari" class="pfp" /><div class="text"><h1>Athar Ansari</h1></div><div class="logolink"><a href="https://github.com/athar-ansari" target="_blank" rel="noreferrer noopener" aria-label="Athar Ansari on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/prakhartiwari0.png" alt="Prakhar Tiwari" class="pfp" /><div class="text"><h1>Prakhar Tiwari</h1></div><div class="logolink"><a href="https://github.com/prakhartiwari0" target="_blank" rel="noreferrer noopener" aria-label="Prakhar Tiwari on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/hassana123.png" alt="Hassana Abdullahi" class="pfp" /><div class="text"><h1>Hassana Abdullahi</h1></div><div class="logolink"><a href="https://github.com/hassana123" target="_blank" rel="noreferrer noopener" aria-label="Hassana Abdullahi on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/JumaCodes.png" alt="Olumese Steve-John" class="pfp" /><div class="text"><h1>Olumese Steve-John</h1></div><div class="logolink"><a href="https://github.com/JumaCodes" target="_blank" rel="noreferrer noopener" aria-label="Olumese Steve-John on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/lubnafathima.png" alt="Lubna Fathima N" class="pfp" /><div class="text"><h1>Lubna Fathima N</h1></div><div class="logolink"><a href="https://github.com/lubnafathima" target="_blank" rel="noreferrer noopener" aria-label="Lubna Fathima on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/allanlalangan.png" alt="Allan Lalangan" class="pfp" /><div class="text"><h1>Allan Lalangan</h1></div><div class="logolink"><a href="https://github.com/allanlalangan" target="_blank" rel="noreferrer noopener" aria-label="Allan Lalangan on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/Seyi-Ojo.png" alt="Mayowa Ojo" class="pfp" /><div class="text"><h1>Mayowa Ojo</h1></div><div class="logolink"><a href="https://github.com/Seyi-Ojo" target="_blank" rel="noreferrer noopener" aria-label="Mayowa Ojo on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/AmitBarman99.png" alt="Amit Barman" class="pfp" /><div class="text"><h1>Amit Barman</h1></div><div class="logolink"><a href="https://github.com/AmitBarman99" target="_blank" rel="noreferrer noopener" aria-label="Amit Barman on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/ppdTurja.png" alt="Partha Turja" class="pfp" /><div class="text"><h1>Partha Turja</h1></div><div class="logolink"><a href="https://github.com/ppdTurja" target="_blank" rel="noreferrer noopener" aria-label="Partha Turja on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/Brainiac-M.png" alt="Mahmood Ademoye" class="pfp" /><div class="text"><h1>Mahmood Ademoye</h1></div><div class="logolink"><a href="https://github.com/Brainiac-M" target="_blank" rel="noreferrer noopener" aria-label="Mahmood Ademoye on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+      <div class="concard"><img src="https://github.com/abitsalihu.png" alt="Abit Salihu" class="pfp" /><div class="text"><h1>Abit Salihu</h1></div><div class="logolink"><a href="https://github.com/abitsalihu" target="_blank" rel="noreferrer noopener" aria-label="Abit Salihu on GitHub"><img src="img/GitHub120px.png" alt="GitHub" class="github-logo" /></a></div></div>
+    </section>
+    <!-- /Contributors -->
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="title">
+        <h1>Book a Tour</h1>
+        <div class="line"></div>
+      </div>
+      <div class="contact_us">
+        <form class="cform" id="contact-form" novalidate>
+          <div class="crow-message">
+            <h2 class="color">Book a Tour</h2>
+            <div></div>
+          </div>
+          <div class="crow-in">
+            <div class="input-group">
+              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name" required aria-required="true" />
+              <span class="input-error" id="name-error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <input type="email" id="email" name="email" placeholder="Your email address" autocomplete="email" required aria-required="true" />
+              <span class="input-error" id="email-error" role="alert"></span>
+            </div>
+          </div>
+          <div class="crow-in">
+            <div class="input-group">
+              <input type="tel" id="phone" name="phone" placeholder="Contact number e.g. +91 98765 43210" autocomplete="tel" required aria-required="true" />
+              <span class="input-error" id="phone-error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <input type="number" id="guests" name="guests" placeholder="Number of guests" min="1" max="50" required aria-required="true" />
+              <span class="input-error" id="guests-error" role="alert"></span>
+            </div>
+          </div>
+          <div class="crow-in">
+            <div class="input-group">
+              <select name="tour" id="tour" aria-label="Select tour package" required>
+                <option value="">-- Select Tour Package --</option>
+                <option value="Everest Camp Trek">Everest Camp Trek</option>
+                <option value="Walking Holidays">Walking Holidays</option>
+                <option value="Andaman Beaches">Andaman Beaches</option>
+                <option value="Port of Spain City Tour">Port of Spain City Tour</option>
+                <option value="Gasparee Caves">Gasparee Caves</option>
+                <option value="Trinidad North Coast">Trinidad North Coast</option>
+                <option value="Himalayan Sunrise Trek">Himalayan Sunrise Trek</option>
+              </select>
+              <span class="input-error" id="tour-error" role="alert"></span>
+            </div>
+            <div class="input-group">
+              <input type="date" id="travel-date" name="travel_date" required aria-required="true" aria-label="Preferred travel date" />
+              <span class="input-error" id="date-error" role="alert"></span>
+            </div>
+          </div>
+          <div class="crow">
+            <div class="ccol-left">
+              <select name="country" id="country" aria-label="Select your country">
+                <option value="">-- Select Country --</option>
+                <option value="India">India</option>
+                <option value="Russia">Russia</option>
+                <option value="USA">USA</option>
+                <option value="Japan">Japan</option>
+                <option value="France">France</option>
+                <option value="Brazil">Brazil</option>
+                <option value="UK">United Kingdom</option>
+                <option value="Australia">Australia</option>
+              </select>
+            </div>
+          </div>
+          <div class="crow">
+            <div class="ccol-left">
+              <textarea id="remarks" name="remarks" placeholder="Special requests or questions..." rows="4" aria-required="false"></textarea>
+            </div>
+          </div>
+          <div class="crow-s-wrap">
+            <button type="submit" class="ctn submit-btn" id="submit-btn">
+              <span class="btn-text">Book Now</span>
+              <i class="fa fa-calendar-check-o"></i>
+            </button>
+          </div>
+          <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
+        </form>
+        <div class="cbox">
+          <div>
+            <p class="cbox-message">Prefer another way?<br />Reach us using the details below.</p>
+            <div class="cbox-line"></div>
+          </div>
+          <div class="c_boxx">
+            <a href="mailto:tourism@adventure.com">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              tourism@adventure.com
+            </a>
+          </div>
+          <div class="c_boxx">
+            <a href="tel:+911234567890">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              (+91) 12345-67890
+            </a>
+          </div>
+          <div class="c_boxx">
+            <a href="https://maps.google.com/?q=Kolkata,West+Bengal,India" target="_blank" rel="noreferrer noopener">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              Kolkata, West Bengal, India
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Contact -->
+
+    <!-- Scroll to top -->
+    <button class="scroll-top" id="upbtn" aria-label="Scroll to top" title="Back to top">
+      <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="./img/mountain.png" alt="Adventure logo" width="32" />
+          <span class="logo" style="font-size:1.1rem">ADVENTURE</span>
+        </div>
+        <p class="footer-copy">Created by More Anushka &nbsp;|&nbsp; &copy; <span id="footer-year"></span> All rights reserved.</p>
+        <ul class="social" aria-label="Social links">
+          <li><a href="https://pritam-sarbajna-portfolio.netlify.app/" target="_blank" rel="noreferrer noopener" aria-label="Portfolio"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+          <li><a href="https://github.com/PritamSarbajna" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/pritam-sarbajna-74945821b/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </footer>
+    <!-- /Footer -->
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

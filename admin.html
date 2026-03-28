@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Adventure</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div class="admin-login-screen" id="admin-login-screen">
+    <div class="admin-login-box">
+      <div class="admin-brand">
+        <img src="./img/mountain.png" alt="logo" width="40" />
+        <h1>Admin Panel</h1>
+      </div>
+      <form id="admin-login-form" novalidate>
+        <div class="a-field">
+          <input type="text" id="a-username" placeholder="Admin username" required />
+        </div>
+        <div class="a-field">
+          <input type="password" id="a-password" placeholder="Password" required />
+        </div>
+        <span class="a-err" id="a-login-err"></span>
+        <button type="submit" class="a-btn" id="a-login-btn">
+          <span class="btn-label">Login</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="admin-dashboard" id="admin-dashboard" style="display:none">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <img src="./img/mountain.png" alt="logo" width="30" />
+        <span>Adventure</span>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="sidebar-link active" data-panel="messages">
+          <i class="fa fa-envelope"></i> Messages
+        </button>
+        <button class="sidebar-link" data-panel="users">
+          <i class="fa fa-users"></i> Users
+        </button>
+      </nav>
+      <button class="sidebar-logout" id="admin-logout">
+        <i class="fa fa-sign-out"></i> Logout
+      </button>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h2 id="panel-title">Messages</h2>
+        <span id="admin-welcome"></span>
+      </header>
+
+      <!-- Messages Panel -->
+      <section class="admin-panel active" id="panel-messages">
+        <div class="panel-toolbar">
+          <input type="text" id="msg-search" placeholder="Search messages..." class="a-search" />
+          <span class="record-count" id="msg-count"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table" id="messages-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Tour</th>
+                <th>Guests</th>
+                <th>Travel Date</th>
+                <th>Country</th>
+                <th>Message</th>
+                <th>Booked On</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="messages-tbody"></tbody>
+          </table>
+          <div class="empty-state" id="msg-empty" style="display:none">
+            <i class="fa fa-inbox"></i>
+            <p>No messages yet</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Panel -->
+      <section class="admin-panel" id="panel-users">
+        <div class="panel-toolbar">
+          <input type="text" id="user-search" placeholder="Search users..." class="a-search" />
+          <span class="record-count" id="user-count"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table" id="users-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+          <div class="empty-state" id="user-empty" style="display:none">
+            <i class="fa fa-users"></i>
+            <p>No registered users yet</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

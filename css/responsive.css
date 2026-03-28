@@ -1,0 +1,63 @@
+/* ===== Responsive ===== */
+
+/* Large tablets / small desktops */
+@media screen and (max-width: 1100px) {
+  .menu-btn { display: flex; }
+  .nav-links {
+    position: fixed; top: 68px; left: 0; width: 100%;
+    flex-direction: column; gap: 0;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    z-index: 99;
+  }
+  body.light .nav-links { background: rgba(245,245,245,0.97); }
+  .nav-links.open { max-height: 600px; padding: 1rem 0 2rem; }
+  .nav-links li { width: 100%; text-align: center; }
+  .nav-links li a { display: block; padding: 12px 20px; font-size: 0.95rem; }
+  .theme-toggle-li { padding: 12px 0; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablets */
+@media screen and (max-width: 850px) {
+  section { width: 94%; }
+  .events-row { flex-direction: column; align-items: center; }
+  .card { max-width: 480px; width: 100%; }
+  .tours .row { flex-direction: column; }
+  .content-col, .image-col { width: 100%; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonial-card { flex: 0 0 100%; }
+  .contact_us { flex-direction: column; }
+  .cform, .cbox { width: 100%; }
+  .containerx { width: 90%; }
+  .about-carousel-wrap { flex-direction: column; }
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .crow-in { flex-direction: column; }
+  .image-gallery { grid-template-columns: repeat(2, 1fr); }
+  .image-gallery img { height: 130px; }
+  .ctn { padding: 11px 24px; }
+}
+
+/* Small mobile */
+@media screen and (max-width: 400px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .ctn { padding: 10px 20px; font-size: 0.8rem; }
+}
+
+/* iOS Safari: disable fixed background (causes rendering bugs) */
+@supports (-webkit-touch-callout: none) {
+  header#home,
+  .explore,
+  #about_us {
+    background-attachment: scroll;
+  }
+}
