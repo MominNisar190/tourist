@@ -44,7 +44,7 @@ You should see:
 - Right-click `admin.html` → **Open with Live Server**
 - Login with:
   - Username: `admin`
-  - Password: `anushka555`
+  - Password: `nisar555`
 
 ---
 
@@ -90,4 +90,4 @@ tourism-website-main/
 
 - The backend must be running (`node server.js`) for login, signup, and booking to work
 - If you see "Failed to fetch" — the backend is not running
-- Admin credentials: `admin` / `anushka555`
+- Admin credentials: `admin` / `nisar555`
